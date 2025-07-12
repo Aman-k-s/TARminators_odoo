@@ -3,11 +3,62 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <h2>Homepage</h2>
-  <p>
-    {% if request.user.is_authenticated %}
-      Welcome {{ request.user.username }}
-    {% endif %}
-  </p>
-  <p>This is the index page of the site.</p>
+<header class="header">
+  <h1>Skill Swap Platform</h1>
+  <nav>
+    <a href="#">Home</a>
+    <span>
+      {% if request.user.is_authenticated %}
+        {{ request.user.username }}
+      {% else %}
+        Guest
+      {% endif %}
+    </span>
+    <div class="avatar">
+      {% if request.user.is_authenticated %}
+        {{ request.user.username|slice:":2"|upper }}
+      {% else %}
+        US
+      {% endif %}
+    </div>
+    <button id="themeToggle">🌓</button>
+  </nav>
+</header>
+
+<section class="controls">
+  <select id="statusFilter">
+    <option>Pending</option>
+    <option>Accepted</option>
+    <option>Rejected</option>
+  </select>
+  <input type="text" id="searchInput" placeholder="Search..." />
+  <button id="searchBtn">Search</button>
+</section>
+
+<section id="userList" class="card-list">
+  <div class="card">
+    <div class="profile">
+      <div class="avatar">MD</div>
+      <div>
+        <h2>Marc Demo</h2>
+        <p><span class="label">Skills Offered:</span> JavaScript</p>
+        <p><span class="label">Skill Wanted:</span> Photoshop</p>
+        <p class="rating">Rating: 3.9/5</p>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="status yellow"><i class="clock-icon"></i> Pending</span>
+      <button class="btn accept">Accept</button>
+      <button class="btn reject">Reject</button>
+    </div>
+  </div>
+</section>
+
+<div class="pagination">
+  <button class="nav-btn">&lt;</button>
+  <span>1</span>
+  <button class="nav-btn">&gt;</button>
+</div>
+
+<div id="toast" class="toast hidden">Action successful!</div>
 {% endblock %}
