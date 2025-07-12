@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}All Users{% endblock %}
+
+{% block body %}
+<h2>All Users</h2>
+
+{% for profile in users %}
+  <div style="margin-bottom: 20px;">
+    <strong>{{ profile.user.username }}</strong><br>
+    <span style="display: flex; flex-wrap: wrap; gap: 6px;">
+      {% for skill in profile.skills.all %}
+        <span style="background: #e0e0e0; padding: 4px 8px; border-radius: 12px;">
+          {{ skill.name }}
+        </span>
+      {% empty %}
+        <span style="font-style: italic; color: #888;">No skills</span>
+      {% endfor %}
+    </span>
+  </div>
+{% empty %}
+  <p>No users found.</p>
+{% endfor %}
+{% endblock %}
