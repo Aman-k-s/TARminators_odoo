@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
-from .forms import SignupForm, LoginForm
-from django.contrib.auth.forms import AuthenticationForm
+from .models import userbase
+from .forms import SignupForm, LoginForm, UpdateUserForm
 
 
 # Create your views here.
@@ -10,6 +10,21 @@ def index(request):
     if request.user.is_anonymous:
         return redirect("/login")
     return render(request,'index.html')
+
+def profile_view(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+    profile = userbase.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = UpdateUserForm(instance=profile)
+
+    return render(request, 'profile.html', {'form': form})
 
 def loginUser(request):
     form = LoginForm(request.POST or None)

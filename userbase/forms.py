@@ -39,3 +39,12 @@ class LoginForm(forms.Form):
         label="Password",
         widget=forms.PasswordInput(attrs={'placeholder': 'Enter password'})
     )
+    
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = userbase
+        fields = ['location', 'public', 'profileImg', 'skills']
+        widgets = {
+            'skills': forms.CheckboxSelectMultiple(),  # or forms.SelectMultiple()
+        }

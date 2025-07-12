@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+  <h2>Update Your Profile</h2>
+    <p>{{ request.user.username}}</p>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div>
+      <label for="{{ form.location.id_for_label }}">Location:</label><br>
+      {{ form.location }}
+    </div>
+
+    <div>
+      <label for="{{ form.public.id_for_label }}">Public Profile:</label><br>
+      {{ form.public }}
+    </div>
+
+    <div>
+      <label for="{{ form.profileImg.id_for_label }}">Profile Image:</label><br>
+      {{ form.profileImg }}
+      {% if form.instance.profileImg %}
+        <br><img src="{{ form.instance.profileImg.url }}" alt="Current Profile Image" height="100">
+      {% endif %}
+    </div>
+
+    <div>
+      <label for="{{ form.skill_input.id_for_label }}">Skills (comma-separated):</label><br>
+      {{ form.skill_input }}
+    </div>
+
+    <br>
+    <button type="submit">Save Changes</button>
+  </form>
+{% endblock %}

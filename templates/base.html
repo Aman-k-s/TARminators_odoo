@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}My Django Site{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <header>
@@ -11,12 +11,13 @@
             <a href="/">Home</a> |
             <a href="{% url 'login' %}">Login | </a>
             <a href="{% url 'signup' %}">Signup|</a>
-            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'logout' %}">Logout |</a>
+            <a href="{% url 'profile' %}">Profile</a>
         </nav>
     </header>
 
     <main>
-        {% block content %}{% endblock %}
+        {% block body %}{% endblock %}
     </main>
 
     <footer>
