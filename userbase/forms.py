@@ -29,3 +29,13 @@ class SignupForm(forms.ModelForm):
         confirm = cleaned_data.get("confirm_password")
         if pw != confirm:
             raise forms.ValidationError("Passwords do not match.")
+
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        label="Username",
+        widget=forms.TextInput(attrs={'placeholder': 'Enter username'})
+    )
+    password = forms.CharField(
+        label="Password",
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter password'})
+    )
