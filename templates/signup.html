@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<h2>Sign Up</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div>
+    {{ form.username.label_tag }} {{ form.username }}
+    {% for error in form.username.errors %}
+      <div style="color:red;">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div>
+    {{ form.email.label_tag }} {{ form.email }}
+    {% for error in form.email.errors %}
+      <div style="color:red;">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div>
+    {{ form.password.label_tag }} {{ form.password }}
+    {% for error in form.password.errors %}
+      <div style="color:red;">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div>
+    {{ form.confirm_password.label_tag }} {{ form.confirm_password }}
+    {% for error in form.confirm_password.errors %}
+      <div style="color:red;">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div>
+    {{ form.profileImg.label_tag }} {{ form.profileImg }}
+    {% for error in form.profileImg.errors %}
+      <div style="color:red;">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div>
+    {{ form.location.label_tag }} {{ form.location }}
+    {% for error in form.location.errors %}
+      <div style="color:red;">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div>
+    {{ form.public.label_tag }} {{ form.public }}
+    {% for error in form.public.errors %}
+      <div style="color:red;">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  {% if form.non_field_errors %}
+    <div style="color:red;">
+      {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <button type="submit">Sign Up</button>
+</form>
+
+{% endblock %}
