@@ -46,5 +46,8 @@ class UpdateUserForm(forms.ModelForm):
         model = userbase
         fields = ['location', 'public', 'profileImg', 'skills']
         widgets = {
-            'skills': forms.CheckboxSelectMultiple(),  # or forms.SelectMultiple()
+            'skills': forms.SelectMultiple(attrs={
+                'id': 'skill-select',
+                'style': 'width: 100%;'
+            })
         }
