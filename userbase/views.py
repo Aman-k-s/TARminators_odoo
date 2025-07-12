@@ -39,7 +39,7 @@ from .serializers import SkillSerializer
 def index(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    return render(request,'index.html')
+    return redirect('dashboard/')
 
 from django.shortcuts import render, redirect
 from .models import userbase
