@@ -2,45 +2,56 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-<h2>Your Profile</h2>
-<p><strong>Username:</strong> {{ request.user.username }}</p>
+<div class="container">
+  <div class="card bg-dark text-light border border-secondary shadow p-4">
+    <h2 class="mb-4">Your Profile</h2>
 
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div>
-    <label>Location:</label><br>
-    {{ form.location }}
+    <p><strong>Username:</strong> {{ request.user.username }}</p>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label class="form-label">Location:</label>
+        {{ form.location }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Public:</label>
+        {{ form.public }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Profile Image:</label><br>
+        {{ form.profileImg }}
+        {% if form.instance.profileImg %}
+          <div class="mt-2">
+            <img src="{{ form.instance.profileImg.url }}" height="100" class="rounded border border-secondary">
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-info text-dark fw-bold">Save Changes</button>
+      </div>
+    </form>
   </div>
 
-  <div>
-    <label>Public:</label><br>
-    {{ form.public }}
+  <hr class="border-secondary my-4">
+
+  <div class="card bg-dark text-light border border-secondary shadow p-4">
+    <h3 class="mb-3">Skills</h3>
+    <div class="d-flex flex-wrap gap-2">
+      {% if current_skills %}
+        {% for skill in current_skills %}
+          <span class="badge rounded-pill text-dark bg-info bg-opacity-75 px-3 py-2">
+            {{ skill.name }}
+          </span>
+        {% endfor %}
+      {% else %}
+        <p class="text-muted fst-italic">No skills added.</p>
+      {% endif %}
+    </div>
   </div>
-
-  <div>
-    <label>Profile Image:</label><br>
-    {{ form.profileImg }}
-    {% if form.instance.profileImg %}
-      <br><img src="{{ form.instance.profileImg.url }}" height="100">
-    {% endif %}
-  </div>
-
-  <br>
-  <button type="submit">Save Changes</button>
-</form>
-
-<hr>
-
-<h3>Skills</h3>
-<div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;">
-  {% if current_skills %}
-    {% for skill in current_skills %}
-      <span style="background: #e0e0e0; padding: 4px 8px; border-radius: 12px;">
-        {{ skill.name }}
-      </span>
-    {% endfor %}
-  {% else %}
-    <p>No skills added.</p>
-  {% endif %}
 </div>
 {% endblock %}

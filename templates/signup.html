@@ -3,69 +3,81 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block body %}
-<h2>Sign Up</h2>
+<div class="d-flex justify-content-center">
+  <div class="card bg-dark text-light border border-secondary shadow p-4" style="max-width: 500px; width: 100%;">
+    <h2 class="text-center mb-4">Sign Up</h2>
 
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
 
-  <div>
-    {{ form.username.label_tag }} {{ form.username }}
-    {% for error in form.username.errors %}
-      <div style="color:red;">{{ error }}</div>
-    {% endfor %}
+      <div class="mb-3">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {% for error in form.username.errors %}
+          <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {% for error in form.email.errors %}
+          <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        {% for error in form.password.errors %}
+          <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.confirm_password.label_tag }}
+        {{ form.confirm_password }}
+        {% for error in form.confirm_password.errors %}
+          <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.profileImg.label_tag }}
+        {{ form.profileImg }}
+        {% for error in form.profileImg.errors %}
+          <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.location.label_tag }}
+        {{ form.location }}
+        {% for error in form.location.errors %}
+          <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.public.label_tag }}
+        {{ form.public }}
+        {% for error in form.public.errors %}
+          <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+          {% for error in form.non_field_errors %}
+            <p class="mb-0">{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-info text-dark fw-bold">Sign Up</button>
+      </div>
+    </form>
   </div>
-
-  <div>
-    {{ form.email.label_tag }} {{ form.email }}
-    {% for error in form.email.errors %}
-      <div style="color:red;">{{ error }}</div>
-    {% endfor %}
-  </div>
-
-  <div>
-    {{ form.password.label_tag }} {{ form.password }}
-    {% for error in form.password.errors %}
-      <div style="color:red;">{{ error }}</div>
-    {% endfor %}
-  </div>
-
-  <div>
-    {{ form.confirm_password.label_tag }} {{ form.confirm_password }}
-    {% for error in form.confirm_password.errors %}
-      <div style="color:red;">{{ error }}</div>
-    {% endfor %}
-  </div>
-
-  <div>
-    {{ form.profileImg.label_tag }} {{ form.profileImg }}
-    {% for error in form.profileImg.errors %}
-      <div style="color:red;">{{ error }}</div>
-    {% endfor %}
-  </div>
-
-  <div>
-    {{ form.location.label_tag }} {{ form.location }}
-    {% for error in form.location.errors %}
-      <div style="color:red;">{{ error }}</div>
-    {% endfor %}
-  </div>
-
-  <div>
-    {{ form.public.label_tag }} {{ form.public }}
-    {% for error in form.public.errors %}
-      <div style="color:red;">{{ error }}</div>
-    {% endfor %}
-  </div>
-
-  {% if form.non_field_errors %}
-    <div style="color:red;">
-      {% for error in form.non_field_errors %}
-        <p>{{ error }}</p>
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  <button type="submit">Sign Up</button>
-</form>
-
+</div>
 {% endblock %}
